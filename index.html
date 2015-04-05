@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-
 <head>
-  <script src="https://code.angularjs.org/1.4.0-beta.0/angular.js"></script>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js"></script>
+    <script src="https://code.angularjs.org/1.4.0-beta.6/angular.js"></script>
+    <script src="https://raw.githubusercontent.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <script src="new-item.modal.js"></script>
 </head>
-
 <body ng-controller="MainController">
-  <h1>Follow</h1>
-
-  <div id="new-goal">
-    <input type="text" required placeholder="new goal" ng-model="newItemName" />
-  </div>
-
-  <div class="goal-item">
-    <div class="goal-name">{{data.name}}</div>
-    <button ng-click="createNewChild(data)">Add child</button>
-  </div>
-
-
-  <div ng-repeat="item in data.children">
-    <div class="goal-item">
-      <div class="goal-name">{{item.name}}</div>
-      <button ng-click="createNewChild(item)">Add child</button>
+    <!--<h1>Follow</h1>
+    <div id="new-goal">
+        <input type="text" required placeholder="new goal" ng-model="newItemName" />
+    </div>-->
+    <div>
+        {{data.name}}
     </div>
-  </div>
+    <div>
+        {{data.description}}
+    </div>
 
-  <pre>{{ data | json }}</pre>
-  {{ error }}
+    <button class="btn btn-default btn-sm" ng-click="addItem(data)">Add Item</button>
+
+    <accordion>
+        <accordion-group heading="{{item.name}}" ng-repeat="item in data.children">
+            {{item.description}}
+
+            <div ng-repeat="child in item.children" ng-click="goToItem(child)">
+                {{child.name}}, {{child.description}}
+            </div>
+
+            <button class="btn btn-default btn-sm" ng-click="addItem(item)">Add Item</button>
+        </accordion-group>
+    </accordion>
+    <!--<div class="goal-item">
+      <div class="goal-name">{{data.name}}</div>
+      <button ng-click="createNewChild(data)">Add child</button>
+    </div>
+
+
+    <div ng-repeat="item in data.children">
+      <div class="goal-item">
+        <div class="goal-name">{{item.name}}</div>
+        <button ng-click="createNewChild(item)">Add child</button>
+      </div>
+    </div>-->
+    <pre>{{ data | json }}</pre>
+    {{ error }}
 </body>
-
 </html>

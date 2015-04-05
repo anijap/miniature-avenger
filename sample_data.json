@@ -1,13 +1,17 @@
 {
-  "name": "A",
-  "children": [
-    {
-      "name": "b",
-      "children": []
-    },
-    {
-      "name": "c",
-      "children": []
-    }
-  ]
+    "name": "A",
+    "description": "This is A",
+
+    "children": [
+        {
+            "name": "b",
+            "description": "This is B",
+            "children": [ ]
+        },
+        {
+            "name": "c",
+            "description": "This is C",
+            "children": [ ]
+        }
+    ]
 }
