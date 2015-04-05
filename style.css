@@ -1,0 +1,12 @@
+/* Styles go here */
+#new-goal {
+  padding-bottom:15px;
+}
+
+.goal-item {
+  padding: 10px;
+}
+
+.goal-name {
+  bold;
+}
