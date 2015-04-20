@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="style.css" />
     <script src="script.js"></script>
     <script src="new-item.modal.js"></script>
+
+    <!-- bower:js -->
+    <script src="bower_components/filesaver/filesaver.js"></script>
+    <!-- endbower -->
 </head>
 <body ng-controller="MainController">
     <!--<h1>Follow</h1>
     <div id="new-goal">
         <input type="text" required placeholder="new goal" ng-model="newItemName" />
     </div>-->
+    <button ng-show="data.parent !== data" ng-click="goToParent(data)">Go to parent</button>
     <div>
         {{data.name}}
     </div>
@@ -20,32 +25,21 @@
         {{data.description}}
     </div>
 
+    <!--TODO: why can't these two buttons be placed below the accordion?-->
     <button class="btn btn-default btn-sm" ng-click="addItem(data)">Add Item</button>
+    <button class="btn btn-default btn-sm" ng-click="saveData(data)">Save data</button>
 
     <accordion>
         <accordion-group heading="{{item.name}}" ng-repeat="item in data.children">
             {{item.description}}
 
-            <div ng-repeat="child in item.children" ng-click="goToItem(child)">
-                {{child.name}}, {{child.description}}
-            </div>
-
-            <button class="btn btn-default btn-sm" ng-click="addItem(item)">Add Item</button>
+            <button class="btn btn-default btn-sm" ng-click="goToItem(item)">Go to item!</</button>
         </accordion-group>
     </accordion>
-    <!--<div class="goal-item">
-      <div class="goal-name">{{data.name}}</div>
-      <button ng-click="createNewChild(data)">Add child</button>
-    </div>
+    
 
 
-    <div ng-repeat="item in data.children">
-      <div class="goal-item">
-        <div class="goal-name">{{item.name}}</div>
-        <button ng-click="createNewChild(item)">Add child</button>
-      </div>
-    </div>-->
-    <pre>{{ data | json }}</pre>
+    <!--<pre>{{ data | json }}</pre>-->
     {{ error }}
 </body>
 </html>

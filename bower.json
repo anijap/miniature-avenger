@@ -1,0 +1,22 @@
+{
+    "name": "planning-things",
+    "version": "0",
+    "homepage": "https://github.com/anijap/miniature-avenger",
+    "authors": [
+        "Michael Yartsev <anijap@gmail.com>"
+    ],
+    "description": "Userful helper to plan things",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "filesaver": "git://github.com/eligrey/FileSaver.js",
+    },
+    "devDependencies": {
+    }
+}
