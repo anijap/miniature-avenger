@@ -1,40 +1,7 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
 (function () {
 
-    var MainController = function ($scope, $http, $modal) {
-        $http.get('sample_data.json')
-          .success(function (data, status, headers, config) {
-              // this callback will be called asynchronously
-              // when the response is available 
-              $scope.data = data;
-              $scope.data.parent = data; // This is the root
-
-              // Set up parents
-              var setUpParents = function (data) {
-                  if (data.children) {
-                      data.children.forEach(function (child) {
-                          child.init = function () {
-                              child.parent = data;
-                              delete this.init;
-                              return this;
-                          }
-                          child.init();
-                      });
-
-                      data.children.forEach(function (child) {
-                          setUpParents(child);
-                      });
-                  }
-              }
-
-              setUpParents($scope.data);
-          })
-          .error(function (data, status, headers, config) {
-              // called asynchronously if an error occurs
-              // or server returns response with an error status.
-              $scope.error = "ERROR!!!" + data;
-          });
-
+    var MainController = function ($scope, $http, $modal, fileReader) {
         var createNewChild = function (item) {
             item.children.push({
                 "name": $scope.newItemName,
@@ -102,20 +69,51 @@ var app = angular.module('myApp', ['ui.bootstrap']);
             }
             cleanUpParents(data);
 
-            //alert(JSON.stringify(data));
-
             // Save to file
-            //var bb = new BlobBuilder();
-            //var bb = new Blob();
-            //bb.append(data);
-            //var blob = bb.getBlob("application/json;charset=" + document.characterSet);
-            //saveAs(blob, "ToDo.json");
             var blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-            //var aFileParts = ['<a id="a"><b id="b">hey!</b></a>']; window.MozBlobBuilder
-            //var blob = new Blob(aFileParts, { type: 'text/html' });
             saveAs(blob, "ToDo.json");
         }
+
+        $scope.readFile = function () {
+            var reader = new FileReader();
+
+
+            reader.onloadend = function (event) {
+
+                var stuff = 7;
+                // this callback will be called asynchronously
+                // when the response is available 
+                var temp = JSON.parse(event.target.result);
+                //$scope.data = JSON.parse(reader.result);
+                temp.parent = temp; // This is the root
+
+                // Set up parents
+                var setUpParents = function (data) {
+                    if (data.children) {
+                        data.children.forEach(function (child) {
+                            child.init = function () {
+                                child.parent = data;
+                                delete this.init;
+                                return this;
+                            }
+                            child.init();
+                        });
+
+                        data.children.forEach(function (child) {
+                            setUpParents(child);
+                        });
+                    }
+                }
+
+                setUpParents(temp);
+                $scope.data = temp;
+                $scope.$apply();
+
+            };
+
+            reader.readAsText($scope.file);
+        };
     }
 
-    app.controller('MainController', ["$scope", "$http", "$modal", MainController]);
+    app.controller('MainController', ["$scope", "$http", "$modal", "fileReader", MainController]);
 }());
