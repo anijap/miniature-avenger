@@ -45,7 +45,11 @@
             <accordion-group heading="{{item.name}}" ng-repeat="item in data.children">
                 {{item.description}}
 
-                <button class="btn btn-default btn-sm" ng-click="goToItem(item)">Go to item!</</button>
+                <button class="btn btn-default btn-sm" ng-click="goToItem(item)">Go to item!</button>
+                <label>
+                  <input type="checkbox" ng-model="item.done">
+                  Done!
+                </label>
             </accordion-group>
         </accordion>
 
