@@ -42,7 +42,11 @@
 
 
         <accordion>
-            <accordion-group heading="{{item.name}}" ng-repeat="item in data.children">
+            <accordion-group ng-repeat="item in data.children">
+                <accordion-heading>
+                    <span ng-show="!item.done">{{item.name}}</span>
+                    <span ng-show="item.done"><s>{{item.name}}</s></span>
+                </accordion-heading>
                 {{item.description}}
 
                 <button class="btn btn-default btn-sm" ng-click="goToItem(item)">Go to item!</button>
