@@ -60,14 +60,20 @@
     </nav>
 
     <main>
-      <div ng-show="!data">
-          <p>test</p>
-          <div file-input="file" on-change="readFile()"></div>
-      </div>
       <h1 id="hello">Hello!</h1>
-      <p>Welcome to miniature avenger. Details coming soon.</p>
-      <a href="#ignore-click" class="button--primary">Are you new here?</a>
-      <div class="button--primary" file-input="file" on-change="readFile()">No, I have a data file already.</div>
+      <p>Welcome to miniature avenger. 
+      <br><code class="Bug#1">More detailed description coming soon</code>
+      <br>But for now, you can get started by answering if: </p>
+      <a href="#ignore-click" class="button--primary">
+        <label>
+        New here?
+        <input type="file" ng-file-select="onFileSelect($files)" style="display: none">
+        </label>
+      </a>
+      <a href="#ignore-click" class="button--primary">Already have a a data file?
+      </a>
+       
+      </div>
     </main>
 
     <!-- build:js scripts/main.min.js -->

@@ -1,4 +1,4 @@
-(function() {
+
     angular.module('myApp')
     .directive('fileInput', function ($parse) {
         return {
@@ -22,4 +22,3 @@
             }
         };
     });
-}());
